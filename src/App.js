@@ -1,5 +1,7 @@
 import { marked } from "marked";
 import { useState } from "react";
+import Window from "./components/window/Window";
+import "./App.css";
 
 marked.use({
   breaks: true,
@@ -49,6 +51,7 @@ function App() {
   
   ![freeCodeCamp Logo](https://cdn.freecodecamp.org/testable-projects-fcc/images/fcc_secondary.svg)
   `;
+
   const parseText = (txt) => {
     return marked.parse(txt);
   };
@@ -58,12 +61,19 @@ function App() {
 
   return (
     <div className="App">
-      <textarea
+      <Window hero ="Editor">
+        <div className="window__editor">
+        <textarea
         id="editor"
         onChange={(e) => setEditorText(parseText(e.target.value))}
         defaultValue={defaultText}
-      ></textarea>
+        ></textarea>
+        </div>
+      </Window>
+
+      <Window hero="Preview">
       <div id="preview" dangerouslySetInnerHTML={theObj}></div>
+      </Window>
     </div>
   );
 }
